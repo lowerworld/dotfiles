@@ -1,0 +1,48 @@
+source $VIMRUNTIME/defaults.vim
+
+" vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree'
+Plug 'tomasr/molokai'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sleuth'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+call plug#end()
+
+" nerdtree
+noremap <silent> <C-k><C-b> :NERDTreeToggle<CR>
+
+" molokai
+autocmd ColorScheme * highlight Normal ctermbg=none
+colorscheme molokai
+
+" vim-airline
+let g:airline#extensions#hunks#enabled=0
+
+" vim-airline-themes
+let g:airline_theme='simple'
+
+" misc
+set autoread
+set cursorline
+set expandtab
+set fileencodings=utf-8,cp932,sjis,euc-jp
+set hlsearch
+set ignorecase
+set noshowmode
+set noswapfile
+set number
+set signcolumn=yes
+set smartcase
+
+nnoremap w <PageUp>
+nnoremap <Space> <PageDown>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>

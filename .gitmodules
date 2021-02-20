@@ -1,0 +1,6 @@
+[submodule "tag-asdf/.asdf"]
+	path = tag-asdf/.asdf
+	url = https://github.com/asdf-vm/asdf.git
+[submodule "tag-zsh/.zshrc.d/zplug"]
+	path = tag-zsh/.zshrc.d/zplug
+	url = https://github.com/zplug/zplug.git
