@@ -1,0 +1,2 @@
+export PATH=/home/linuxbrew/.linuxbrew/sbin:/home/linuxbrew/.linuxbrew/bin:${PATH}
+fpath=(/home/linuxbrew/.linuxbrew/completions/zsh /home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)

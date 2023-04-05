@@ -1,0 +1,11 @@
+brew "bat"
+brew "coreutils" if OS.mac?
+brew "findutils" if OS.mac?
+brew "fzy"
+brew "git"
+brew "git-lfs"
+brew "icdiff"
+brew "rcm"
+brew "tig"
+brew "vim"
+brew "zsh"
