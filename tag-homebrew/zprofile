@@ -1,0 +1,2 @@
+export PATH=/opt/homebrew/sbin:/opt/homebrew/bin:${PATH}
+fpath=(/opt/homebrew/completions/zsh /opt/homebrew/share/zsh/site-functions $fpath)

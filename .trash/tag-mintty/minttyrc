@@ -1,0 +1,8 @@
+BoldAsColour=yes
+Charset=UTF-8
+ClicksTargetApp=no
+CursorBlinks=no
+CursorType=block
+Locale=en_US
+Term=xterm-256color
+ThemeFile=molokai

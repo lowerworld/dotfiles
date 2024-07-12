@@ -1,0 +1,6 @@
+[alias]
+	sidediff = --paginate difftool --extcmd=\"icdiff --line-numbers\" --no-prompt
+[clean]
+	requireForce = false
+[core]
+	editor = vim
