@@ -1,0 +1,57 @@
+source $VIMRUNTIME/defaults.vim
+
+" Jetpack.vim
+let s:jetpackfile = expand('<sfile>:p:h') .. '/.vim/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
+let s:jetpackurl = 'https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim'
+if !filereadable(s:jetpackfile)
+  call system(printf('curl -fsSLo %s --create-dirs %s', s:jetpackfile, s:jetpackurl))
+endif
+
+packadd vim-jetpack
+call jetpack#begin()
+Jetpack 'tani/vim-jetpack', {'opt': 1}
+Jetpack 'airblade/vim-gitgutter'
+Jetpack 'scrooloose/nerdtree'
+Jetpack 'tomasr/molokai'
+Jetpack 'tpope/vim-fugitive'
+Jetpack 'tpope/vim-sleuth'
+Jetpack 'vim-airline/vim-airline'
+Jetpack 'vim-airline/vim-airline-themes'
+call jetpack#end()
+
+for name in jetpack#names()
+  if !jetpack#tap(name)
+    call jetpack#sync()
+    break
+  endif
+endfor
+
+" nerdtree
+noremap <silent> <C-k><C-b> :NERDTreeToggle<CR>
+
+" molokai
+autocmd ColorScheme * highlight Normal ctermbg=none
+colorscheme molokai
+
+" vim-airline
+let g:airline#extensions#hunks#enabled=0
+
+" vim-airline-themes
+let g:airline_theme='simple'
+
+" misc
+set autoread
+set cursorline
+set expandtab
+set fileencodings=utf-8,cp932,sjis,euc-jp
+set hlsearch
+set ignorecase
+set noshowmode
+set noswapfile
+set number
+set signcolumn=yes
+set smartcase
+
+nnoremap w <PageUp>
+nnoremap <Space> <PageDown>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR><Esc>
