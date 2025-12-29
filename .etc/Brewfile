@@ -1,0 +1,23 @@
+tap "delphinus/sfmono-square" if OS.mac?
+
+brew "bat"
+brew "coreutils" if OS.mac?
+brew "delta"
+brew "findutils" if OS.mac?
+brew "fd"
+brew "fzf"
+brew "git"
+brew "git-lfs"
+brew "grep" if OS.mac?
+brew "lazygit"
+brew "luarocks"
+brew "mise"
+brew "neovim"
+brew "rcm"
+brew "ripgrep"
+brew "sfmono-square" if OS.mac?
+brew "tig"
+brew "tree-sitter-cli"
+brew "zsh"
+
+cask "git-credential-manager"
