@@ -1,0 +1,262 @@
+---@type LazyPluginSpec[]
+return {
+  -- ╭─────────────────────────────────────────────────────────╮
+  -- │                           UI                            │
+  -- ╰─────────────────────────────────────────────────────────╯
+  {
+    "akinsho/bufferline.nvim",
+    keys = {
+      { "<C-PageUp>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev Buffer" },
+      { "<C-PageDown>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
+      { "<C-M-PageUp>", "<Cmd>BufferLineMovePrev<CR>", desc = "Move buffer prev" },
+      { "<C-M-PageDown>", "<Cmd>BufferLineMoveNext<CR>", desc = "Move buffer next" },
+
+      { "<S-Left>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev Buffer" },
+      { "<S-Right>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next Buffer" },
+      { "<M-S-Left>", "<Cmd>BufferLineMovePrev<CR>", desc = "Move buffer prev" },
+      { "<M-S-Right>", "<Cmd>BufferLineMoveNext<CR>", desc = "Move buffer next" },
+    },
+    opts = function(_, opts)
+      local bufferline = require("bufferline")
+
+      return vim.tbl_deep_extend("force", opts, {
+        options = {
+          always_show_bufferline = true,
+          groups = {
+            items = {
+              bufferline.groups.builtin.pinned:with({ icon = "" }),
+            },
+          },
+          hover = {
+            enabled = true,
+            delay = 0,
+            reveal = { "close" },
+          },
+          style_preset = {
+            bufferline.style_preset.no_italic,
+          },
+        },
+      })
+    end,
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      local formatters = {
+        function()
+          return vim
+            .iter(LazyVim.format.resolve())
+            :map(function(formatter)
+              return formatter.active and formatter.resolved or nil
+            end)
+            :flatten()
+            :join(" ")
+        end,
+        icon = {
+          "",
+          color = function()
+            return LazyVim.format.enabled() and "MiniIconsCyan" or nil
+          end,
+        },
+        on_click = function()
+          LazyVim.format.info()
+        end,
+      }
+
+      table.insert(opts.sections.lualine_x, formatters)
+
+      table.insert(opts.sections.lualine_y, 1, {
+        "fileformat",
+        icons_enabled = false,
+      })
+
+      opts.sections.lualine_z = {
+        {
+          "datetime",
+          icon = "󱑎",
+          style = "%H:%M",
+        },
+      }
+
+      return vim.tbl_deep_extend("force", opts, {
+        options = {
+          section_separators = "",
+          component_separators = "⋮",
+        },
+      })
+    end,
+  },
+  {
+    "nvim-mini/mini.ai",
+    opts = function(_, opts)
+      require("which-key").add({
+        mode = { "o", "x" },
+        { "a=", desc = "assignment" },
+        { "i=", desc = "assignment" },
+      })
+
+      return vim.tbl_deep_extend("force", opts, {
+        custom_textobjects = {
+          ["="] = require("mini.ai").gen_spec.treesitter({
+            a = "@assignment.outer",
+            i = "@assignment.inner",
+          }),
+        },
+      })
+    end,
+  },
+  {
+    "nvim-mini/mini.icons",
+    opts = {
+      file = {
+        ["compose.yaml"] = { glyph = "󰡨", hl = "MiniIconsYellow" },
+      },
+      filetype = {
+        json = { glyph = "", hl = "MiniIconsAzure" },
+        yaml = { glyph = "", hl = "MiniIconsRed" },
+      },
+    },
+  },
+  {
+    "folke/snacks.nvim",
+    opts = {
+      indent = {
+        chunk = {
+          enabled = true,
+          char = {
+            corner_top = "╭",
+            corner_bottom = "╰",
+            arrow = "",
+          },
+        },
+      },
+      lazygit = {
+        config = {
+          disableStartupPopups = true,
+          ---@see https://github.com/folke/snacks.nvim/issues/2582
+          -- git = {
+          --   pagers = {
+          --     { pager = "delta --dark --paging=never" },
+          --   },
+          -- },
+          gui = {
+            language = "en",
+            showCommandLog = false,
+          },
+        },
+      },
+      picker = {
+        layout = {
+          preset = function()
+            return vim.o.columns >= 135 and "default" or "vertical"
+          end,
+        },
+        layouts = {
+          default = {
+            layout = {
+              height = 0.9,
+            },
+          },
+          vertical = {
+            layout = {
+              backdrop = true,
+              width = 0.9,
+            },
+          },
+        },
+        sources = {
+          explorer = {
+            hidden = true,
+            win = {
+              input = {
+                keys = { ["<Esc>"] = { "<Nop>", mode = { "n" } } },
+              },
+              list = {
+                keys = { ["<Esc>"] = { "<Nop>", mode = { "n" } } },
+              },
+            },
+          },
+          files = { hidden = true },
+          grep = { hidden = true },
+          projects = {
+            win = {
+              input = {
+                keys = {
+                  ["<Enter>"] = { { "tcd", "picker_explorer" }, mode = { "n", "i" } },
+                },
+              },
+            },
+          },
+        },
+      },
+      terminal = {
+        win = { style = "float" },
+      },
+    },
+  },
+  -- ╭─────────────────────────────────────────────────────────╮
+  -- │                         Extras                          │
+  -- ╰─────────────────────────────────────────────────────────╯
+  -- formatting.biome
+  -- formatting.prettier
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      if LazyVim.has_extra("formatting.biome") then
+        opts.formatters.biome.condition = function()
+          local config_file = vim.fs.find({ "biome.json", "biome.jsonc" }, { path = LazyVim.root.get() })[1]
+
+          if config_file == nil then
+            return false
+          end
+
+          local ok, enabled = pcall(function()
+            local config = vim.json.decode(table.concat(vim.fn.readfile(config_file), "\n"))
+            return vim.tbl_get(config, "formatter", "enabled") ~= false
+          end)
+
+          return ok and enabled
+        end
+      end
+
+      if LazyVim.has_extra("formatting.prettier") then
+        vim.g.lazyvim_prettier_needs_config = true
+      end
+    end,
+  },
+  -- coding.blink
+  {
+    "rafamadriz/friendly-snippets",
+    enabled = false,
+  },
+  -- lang.markdown
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = function(_, opts)
+      if LazyVim.has_extra("lang.markdown") then
+        opts.linters_by_ft.markdown = {}
+      end
+    end,
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    optional = true,
+    opts = {
+      latex = { enabled = false },
+    },
+  },
+  -- lang.typescript
+  {
+    "nvim-mini/mini.icons",
+    opts = {
+      file = {
+        [".prettierrc.js"] = { glyph = "", hl = "MiniIconsPurple" },
+        ["pnpm-lock.yaml"] = { glyph = "", hl = "MiniIconsOrange" },
+        ["pnpm-workspace.yaml"] = { glyph = "", hl = "MiniIconsOrange" },
+        ["tsconfig.json"] = { glyph = "", hl = "MiniIconsAzure" },
+        ["tsconfig.build.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+    },
+  },
+}
