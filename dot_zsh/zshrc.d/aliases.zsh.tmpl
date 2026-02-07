@@ -1,0 +1,13 @@
+{{ if eq .chezmoi.os "darwin" -}}
+alias find='gfind'
+alias grep='ggrep'
+alias ls='gls'
+alias xargs='gxargs'
+
+{{ end -}}
+
+alias cat='bat'
+alias cm='chezmoi'
+alias ll='ls -lphvA --color=auto --group-directories-first --time-style=long-iso'
+alias vim='nvim'
+alias zf='zimfw'
