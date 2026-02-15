@@ -1,0 +1,24 @@
+brew "ast-grep"
+brew "bat"
+brew "chezmoi"
+brew "coreutils" if OS.mac?
+brew "delta"
+brew "fd"
+brew "findutils" if OS.mac?
+brew "fzf"
+brew "git"
+brew "grep" if OS.mac?
+brew "lazygit"
+brew "luarocks"
+brew "mermaid-cli"
+brew "mise"
+brew "neovim"
+brew "ripgrep"
+brew "tig"
+brew "tree-sitter-cli"
+brew "zimfw"
+brew "zsh"
+
+cask "font-0xproto-nerd-font"
+cask "font-migu-1m"
+cask "git-credential-manager"

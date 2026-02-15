@@ -1,0 +1,28 @@
+[alias]
+	ci = commit
+	co = checkout
+	cp = cherry-pick
+	df = diff
+	sidediff = -c delta.features=side-by-side diff
+	st = --paginate status --branch --short
+	tip = log --no-walk --stat
+[color]
+	ui = auto
+[core]
+	abbrev = 8
+	autocrlf = false
+	pager = delta
+	quotepath = false
+	safecrlf = true
+[grep]
+	lineNumber = true
+[init]
+	defaultBranch = main
+[interactive]
+	diffFilter = delta --color-only
+[log]
+	decorate = short
+[pull]
+	ff = only
+[push]
+	default = simple

@@ -1,0 +1,55 @@
+# ╭──────────────────────────────────────────────────────────╮
+# │                         Homebrew                         │
+# ╰──────────────────────────────────────────────────────────╯
+{{- if eq .chezmoi.os "darwin" }}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{- else }}
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+{{- end }}
+
+export HOMEBREW_BUNDLE_FILE='{{ joinPath .chezmoi.sourceDir ".homebrew/Brewfile" }}'
+
+# ╭──────────────────────────────────────────────────────────╮
+# │                      Zim Framework                       │
+# ╰──────────────────────────────────────────────────────────╯
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[arg0]='fg=118'
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]='fg=135'
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=135'
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]='fg=161'
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]='fg=161'
+ZSH_HIGHLIGHT_STYLES[comment]='fg=59'
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=118'
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]='fg=144'
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=144'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=161'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=81'
+ZSH_HIGHLIGHT_STYLES[path]='none'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=161,underline'
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]='fg=161'
+ZSH_HIGHLIGHT_STYLES[rc-quote]='fg=135'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=161'
+ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=161,bold'
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=144'
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=161,underline'
+ZSH_HIGHLIGHT_STYLES[unknown-token]='none'
+
+bindkey -e
+
+# ──────────────────── Initialize modules ────────────────────
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZIM_CONFIG_FILE:-${ZDOTDIR:-${HOME}}/.zimrc} ]]; then
+  source ${HOMEBREW_PREFIX}/opt/zimfw/share/zimfw.zsh init
+fi
+
+source ${ZIM_HOME}/init.zsh
+
+# ╭──────────────────────────────────────────────────────────╮
+# │                           Main                           │
+# ╰──────────────────────────────────────────────────────────╯
+for file in ${${(%):-%N}:A:h}/zshrc.d/*.zsh {{ joinPath .chezmoi.destDir ".config/zshrc.d" }}/*.zsh(N-.); do
+  source ${file}
+done
