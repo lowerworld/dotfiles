@@ -1,0 +1,8 @@
+zmodule environment
+zmodule input
+zmodule archive
+zmodule zsh-users/zsh-completions --fpath src
+
+zmodule completion
+zmodule zsh-users/zsh-autosuggestions
+zmodule zsh-users/zsh-syntax-highlighting

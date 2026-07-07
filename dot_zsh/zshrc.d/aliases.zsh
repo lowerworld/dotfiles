@@ -1,0 +1,6 @@
+alias cat='bat'
+alias cm='chezmoi'
+alias ll='eza --long --classify --all --group-directories-first --time-style=long-iso'
+alias ls='eza'
+alias vim='nvim'
+alias zf='zimfw'
