@@ -1,0 +1,63 @@
+'$schema' = 'https://starship.rs/config-schema.json'
+
+format = '''
+[󰇝](239) $directory( $git_branch$git_commit$git_status)( [󰇝](239) $nodejs)( [󰇝](239) $python)( [󰇝](239) $rust)
+$character
+'''
+
+right_format = '[ $hostname $memory_usage ](fg:059 bg:233)'
+
+[character]
+error_symbol = '[󰄾](067)'
+success_symbol = '[󰄾](067)'
+
+[directory]
+before_repo_root_style = '059'
+fish_style_pwd_dir_length = 1
+format = '[$path]($style)( [$read_only]($read_only_style))'
+read_only = ''
+read_only_style = 'yellow'
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)( [$read_only]($read_only_style))'
+repo_root_style = '033 underline'
+style = '033'
+truncate_to_repo = true
+truncation_length = 0
+
+[git_branch]
+format = '[[ $branch](081)(:[$remote_branch](red))](059)'
+
+[git_commit]
+commit_hash_length = 8
+format = '[\[[$hash](yellow)(:[$tag](purple))\]](059)'
+only_detached = false
+tag_disabled = false
+tag_symbol = ''
+
+[git_status]
+ahead = '[󱦲](118)'
+behind = '[󱦳](red)'
+conflicted = '[$count](162)'
+diverged = '[󰘖](red)'
+format = '([<$staged$conflicted$modified$untracked>](059))( $ahead_behind)'
+modified = '[$count](208)'
+staged = '[$count](118)'
+stashed = ''
+untracked = '$count'
+
+[hostname]
+format = ' $hostname'
+ssh_only = false
+
+[memory_usage]
+disabled = false
+format = ' $ram'
+threshold = 0
+
+[nodejs]
+format = '[ $version](green)'
+
+[python]
+format = '[󰌠 $version](yellow)'
+
+[rust]
+format = '[󱘗 $version](red)'

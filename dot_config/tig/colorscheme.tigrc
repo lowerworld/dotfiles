@@ -1,0 +1,50 @@
+set git-colors = no
+
+color cursor 15 67
+color title-blur 15 161
+color title-focus 81 232
+color status default default
+color header 161 default
+color line-number 243 default
+
+color graph-commit 238 default
+color id 161 default
+color date 67 default
+color author 118 default
+color main-head 81 default bold
+color main-ref 81 default
+color main-remote 208 default
+color main-tracked 208 default bold
+color main-tag 135 default
+color main-local-tag 135 default
+color palette-0 161 default
+color palette-1 208 default
+color palette-2 81 default
+color palette-3 118 default
+color palette-7 135 default
+color palette-9 67 default
+
+color 'commit ' 118 232
+color 'Refs: ' 161 232
+color 'Author: ' 81 232
+color 'AuthorDate: ' 81 232
+color 'Commit: ' 208 232
+color 'CommitDate: ' 208 232
+color '---' 243 default
+color diff-stat 67 default
+color diff-header 243 232
+color 'old file mode ' 162 232
+color 'new file mode ' 118 232
+color 'deleted file mode ' 162 232
+color diff-index 243 232
+color '--- ' 162 232
+color '+++ ' 118 232
+color diff-chunk 161 default
+color diff-del 162 default
+color diff-add 118 default
+
+color stat-staged 118 default
+color stat-unstaged 162 default
+
+color mode 67 default
+color directory 208 default
