@@ -1,0 +1,47 @@
+filekinds:
+  directory:
+    is_bold: false
+
+perms:
+  user_read:
+    foreground: Default
+    is_bold: false
+  user_write:
+    foreground: Default
+    is_bold: false
+  user_execute_file:
+    foreground: Default
+    is_bold: false
+  user_execute_other:
+    foreground: Default
+    is_bold: false
+
+size:
+  number_kilo:
+    is_bold: false
+  number_mega:
+    is_bold: false
+  number_giga:
+    is_bold: false
+  number_huge:
+    is_bold: false
+
+users:
+  user_you:
+    foreground: Default
+    is_bold: false
+  group_yours:
+    foreground: Default
+    is_bold: false
+
+file_type:
+  build:
+    foreground: Default
+    is_bold: false
+    is_underline: false
+  source:
+    foreground: Default
+    is_bold: false
+
+date:
+  foreground: Default

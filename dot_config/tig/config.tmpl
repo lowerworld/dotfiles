@@ -1,0 +1,33 @@
+set commit-order = topo
+set history-size = 0
+set line-graphics = ascii
+set show-changes = true
+set show-notes = true
+set tab-size = 4
+set vertical-split = false
+set wrap-lines = false
+
+set blame-view = \
+  line-number:display=true,interval=1 \
+  date:display=true \
+  author:display=full \
+  id:display=true,width=8 \
+  text
+
+set blob-view = \
+  line-number:display=true,interval=1 \
+  text
+
+set main-view = \
+  line-number:display=true,interval=5 \
+  id:display=true,width=8 \
+  date:display=default \
+  author:display=full \
+  commit-title:graph=v2,refs=true
+
+bind generic - none
+bind generic w move-page-up
+bind main C ?git checkout %(commit)
+bind main R ?git revert %(commit)
+
+source {{ joinPath .chezmoi.destDir ".config/tig/colorscheme.tigrc" }}
