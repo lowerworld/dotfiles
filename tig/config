@@ -30,4 +30,4 @@ bind generic w move-page-up
 bind main C ?git checkout %(commit)
 bind main R ?git revert %(commit)
 
-source {{ joinPath .chezmoi.destDir ".config/tig/colorscheme.tigrc" }}
+source ~/.config/tig/colorscheme.tigrc
