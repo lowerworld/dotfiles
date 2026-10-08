@@ -1,7 +1,7 @@
 font-family = 0xProto Nerd Font
 font-family = Migu 1M
 font-feature = -calt, -liga, -dlig
-font-size = 12.5
+font-size = 16
 
 adjust-cell-height = 2
 adjust-underline-thickness = -1
@@ -33,6 +33,8 @@ macos-titlebar-style = tabs
 macos-option-as-alt = true
 
 bold-color = bright
+
+keybind = shift+enter=text:\x0d
 
 keybind = alt+arrow_left=unbind
 keybind = alt+arrow_right=unbind
