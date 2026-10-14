@@ -172,7 +172,7 @@ return {
           ["sh.dotenv"] = { glyph = "", hl = "MiniIconsYellow" },
           template = { glyph = "", hl = "MiniIconsGrey" },
           toml = { glyph = "󰅪", hl = "MiniIconsOrange" },
-          yaml = { glyph = "󰙅", hl = "MiniIconsRed" },
+          yaml = { glyph = "", hl = "MiniIconsRed" },
           zsh = { glyph = "", hl = "MiniIconsGreen" },
           ["zsh.chezmoitmpl"] = { glyph = "", hl = "MiniIconsGreen" },
         },
