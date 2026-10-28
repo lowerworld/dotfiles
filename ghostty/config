@@ -29,7 +29,7 @@ window-padding-balance = true
 
 shell-integration-features = no-cursor
 
-macos-titlebar-style = transparent
+macos-titlebar-style = tabs
 macos-option-as-alt = true
 macos-icon = xray
 

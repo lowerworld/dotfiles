@@ -96,6 +96,26 @@ return {
       end
     end,
   },
+  -- lang.nix
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      if LazyVim.has_extra("lang.nix") then
+        return vim.tbl_deep_extend("force", opts, {
+          servers = {
+            ["nil"] = {
+              nix = {
+                flake = {
+                  autoArchive = true,
+                },
+              },
+            },
+            nixd = {},
+          },
+        })
+      end
+    end,
+  },
   -- lang.typescript.biome, formatting.prettier
   {
     "stevearc/conform.nvim",
