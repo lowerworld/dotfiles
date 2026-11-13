@@ -10,6 +10,8 @@ map("n", "x", '"_x')
 map("n", "X", '"_X')
 map("n", "<Del>", '"_x')
 
+map("n", "<Enter>", "i", { remap = false })
+
 map("n", "<C-Up>", "<C-w>k", { desc = "Go to Upper Window" })
 map("n", "<C-Down>", "<C-w>j", { desc = "Go to Lower Window" })
 map("n", "<C-Left>", "<C-w>h", { desc = "Go to Left Window" })

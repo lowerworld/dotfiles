@@ -102,8 +102,7 @@ return {
     opts = {},
   },
   {
-    -- "gisketch/triforce.nvim",
-    "DrKJeff16/triforce.nvim",
+    "gisketch/triforce.nvim",
     dependencies = { "nvzone/volt" },
     event = "VeryLazy",
     opts = {

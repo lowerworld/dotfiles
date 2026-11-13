@@ -96,6 +96,26 @@ return {
       end
     end,
   },
+  -- lang.nix
+  {
+    "neovim/nvim-lspconfig",
+    opts = function(_, opts)
+      if LazyVim.has_extra("lang.nix") then
+        return vim.tbl_deep_extend("force", opts, {
+          servers = {
+            ["nil"] = {
+              nix = {
+                flake = {
+                  autoArchive = true,
+                },
+              },
+            },
+            nixd = {},
+          },
+        })
+      end
+    end,
+  },
   -- lang.typescript.biome, formatting.prettier
   {
     "stevearc/conform.nvim",
@@ -125,6 +145,25 @@ return {
         vim.g.lazyvim_prettier_needs_config = true
       end
     end,
+  },
+  -- lang.typescript.oxc
+  {
+    "nvim-mini/mini.icons",
+    opts = {
+      file = vim
+        .iter({
+          ".oxfmtrc.json",
+          ".oxfmtrc.jsonc",
+          ".oxlintrc.json",
+          ".oxlintrc.jsonc",
+          "oxfmt.config.ts",
+          "oxlint.config.ts",
+        })
+        :fold({}, function(acc, k)
+          acc[k] = { glyph = "", hl = "MiniIconsAzure" }
+          return acc
+        end),
+    },
   },
   -- lang.typescript.tsc
   {
